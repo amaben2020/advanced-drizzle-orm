@@ -2,42 +2,6 @@ import { eq, sql } from 'drizzle-orm';
 import { db } from '../db.ts';
 import { accountsTable, transactionsTable, usersTable } from '../schema.ts';
 
-// export async function simulateTransaction() {
-//   const transactionResult = await db.transaction(async (tx) => {
-//     try {
-//       // Step 1: Insert a new user (simulate a transaction)
-//       const [user = undefined] = await tx
-//         .insert(usersTable)
-//         .values({
-//           name: 'John Doe',
-//           age: 30,
-//           email: 'johndoe@example.com',
-//         })
-//         .returning();
-
-//       console.log('user', user);
-
-//       // Step 2: Insert an associated account (simulate business logic)
-//       await tx.insert(accountsTable).values({
-//         balance: 1000,
-//         userId: user?.id!,
-//       });
-
-//       // Simulate an error (for rollback) – comment out to test successful commit
-//       // throw new Error('Simulated error for rollback');
-
-//       // If all goes well, commit and return the result
-//       return user;
-//     } catch (error) {
-//       // Step 3: Rollback on error – any database changes will be reverted
-//       console.error('Transaction failed, rolling back:', error);
-//       throw error; // Re-throw to ensure rollback occurs
-//     }
-//   });
-
-//   return transactionResult;
-// }
-
 export async function createUserAccount() {
   try {
     await db.transaction(async (tx) => {
