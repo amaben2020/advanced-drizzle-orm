@@ -1,0 +1,15 @@
+🧠 Querying & Optimization
+
+CRUD: Insert, Upsert (onConflict) 
+
+✅ Joins – Master innerJoin, leftJoin, rightJoin, and fullJoin with aliases. ✅
+
+🔁 Subqueries – Use .where(sql${subquery}) and build complex expressions.
+
+📐 Views – Use PostgreSQL views with Drizzle and treat them like read-only tables.
+
+🔀 Transactions – Learn db.transaction() for safe, atomic multi-step ops. ✅
+
+📊 Indexing – Understand B-tree, GIN, and partial indexes; use .sql to define them.
+
+🚀 Raw SQL with Drizzle – Use sql`...`.execute() for advanced queries and window functions.
