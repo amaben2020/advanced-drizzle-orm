@@ -33,6 +33,7 @@ export async function createUserAccount() {
 }
 
 export async function sendMoney() {
+  // intentionally hardcoded
   const AMOUNT_TO_SEND = 100;
   const SENDER_ID = 5;
   const RECEIVER_ID = 8;

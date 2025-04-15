@@ -1,4 +1,14 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import {
+  check,
+  index,
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uniqueIndex,
+} from 'drizzle-orm/pg-core';
 
 export const usersTable = pgTable('users_table', {
   id: serial('id').primaryKey(),
@@ -15,16 +25,25 @@ export const accountsTable = pgTable('accounts_table', {
   balance: integer('balance').default(0),
 });
 
-export const transactionsTable = pgTable('transactions_table', {
-  id: serial('id').primaryKey(),
-  senderId: integer('sender_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
-  receiverId: integer('receiver_id')
-    .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
-  amountSent: integer('amount_sent').default(0),
-});
+export const transactionsTable = pgTable(
+  'transactions_table',
+  {
+    id: serial('id').primaryKey(),
+    senderId: integer('sender_id')
+      .notNull()
+      .references(() => usersTable.id, { onDelete: 'cascade' }),
+    receiverId: integer('receiver_id')
+      .notNull()
+      .references(() => usersTable.id, { onDelete: 'cascade' }),
+    amountSent: integer('amount_sent').default(0),
+  },
+  (table) => [
+    check('min_amount_sent', sql`${table.amountSent} > 20`),
+
+    index('name_idx').on(table.amountSent),
+    uniqueIndex('email_idx').on(table.id),
+  ]
+);
 
 export const postsTable = pgTable('posts_table', {
   id: serial('id').primaryKey(),
