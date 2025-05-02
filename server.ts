@@ -1,18 +1,21 @@
 // import { BatchResponse } from 'drizzle-orm/batch';
 import { db } from './db.ts';
-import { usersTable } from './schema.ts';
+import { eventEmitter } from './emitter.ts';
+import { locationData } from './file-sys.ts';
+import { userReportView, usersTable, userView } from './schema.ts';
 import {
   aggregatePostsByUser,
   createPostsForUsers,
 } from './script/group-by.ts';
 import { sendMoney } from './script/simulate-trans.ts';
+import express from 'express';
 
 //const res = await db.select().from(usersTable);
 
 // const res = await sendMoney();
-const res = await aggregatePostsByUser();
+// const res = await aggregatePostsByUser();
 
-console.log(res);
+// console.log(res);
 
 // const batchResponse: BatchResponse = await db.batch([
 //   db
@@ -26,3 +29,12 @@ console.log(res);
 //     .select({ id: usersTable.id, invitedBy: usersTable.invitedBy })
 //     .from(usersTable),
 // ]);
+
+// const app = express();
+
+// eventEmitter.emit('start', 1, 100);
+
+// console.log(locationData);
+
+const user = await db.select().from(userReportView);
+console.log(user);

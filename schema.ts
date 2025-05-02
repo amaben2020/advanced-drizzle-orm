@@ -1,9 +1,11 @@
-import { sql } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
+import cron from 'node-cron';
 import {
   check,
   index,
   integer,
   pgTable,
+  pgView,
   serial,
   text,
   timestamp,
@@ -63,3 +65,26 @@ export type SelectUser = typeof usersTable.$inferSelect;
 
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
+
+// Materialized views
+export const userView = pgView('user_view').as((qb) =>
+  qb.select().from(usersTable).where(eq(usersTable.id, 5))
+);
+
+export const userReportView = pgView('user_report_view').as((qb) =>
+  qb
+    .select({
+      userId: usersTable.id,
+      // totalTransactions: sql<number>`count(t.id)`,
+      // totalSpent: sql<number>`sum(t.amount)`,
+    })
+    .from(usersTable)
+    .leftJoin(transactionsTable, eq(usersTable.id, transactionsTable.senderId))
+    .groupBy(usersTable.id)
+);
+
+let counter = 1;
+cron.schedule('*/1 * * * *', async () => {
+  console.log('Refreshing materialized view...', counter++, counter);
+  await sql`REFRESH MATERIALIZED VIEW CONCURRENTLY user_report_view`;
+});

@@ -16,6 +16,7 @@
     "drizzle-kit": "^0.30.6",
     "drizzle-orm": "^0.41.0",
     "express": "^5.1.0",
+    "node-cron": "^3.0.3",
     "nodemon": "^3.1.9",
     "pg": "^8.14.1",
     "postgres": "^3.4.5"

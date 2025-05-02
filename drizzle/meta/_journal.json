@@ -29,6 +29,20 @@
       "when": 1744465719223,
       "tag": "0003_overjoyed_cannonball",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1745084410375,
+      "tag": "0004_stiff_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1745312002594,
+      "tag": "0005_narrow_shadow_king",
+      "breakpoints": true
     }
   ]
 }

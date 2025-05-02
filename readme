@@ -13,3 +13,6 @@ CRUD: Insert, Upsert (onConflict)
 📊 Indexing – Understand B-tree, GIN, and partial indexes; use .sql to define them.
 
 🚀 Raw SQL with Drizzle – Use sql`...`.execute() for advanced queries and window functions.
+
+Github actions resource
+https://www.codecademy.com/article/how-to-use-github-actions

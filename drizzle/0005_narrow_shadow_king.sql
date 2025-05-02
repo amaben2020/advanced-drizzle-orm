@@ -1,0 +1,1 @@
+CREATE VIEW "public"."user_report_view" AS (select "users_table"."id" from "users_table" left join "transactions_table" on "users_table"."id" = "transactions_table"."sender_id" group by "users_table"."id");
